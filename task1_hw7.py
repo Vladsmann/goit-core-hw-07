@@ -80,7 +80,8 @@ class AddressBook(UserDict):
         upcoming_birthdays = []
         for record in self.data.values():
             if record.birthday:
-                bday = record.birthday.date.replace(year=today.year)
+                birthday_date = datetime.strptime(record.birthday.value, "%d.%m.%Y").date()
+                bday = birthday_date.replace(year=today.year)
                 if bday < today:
                     bday = bday.replace(year=today.year + 1)
                 delta_days = (bday - today).days
